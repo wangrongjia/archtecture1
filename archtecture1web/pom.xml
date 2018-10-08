@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.sishuok</groupId>
+		<artifactId>archtecture1</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>com.sishuok</groupId>
+	<artifactId>archtecture1web</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>archtecture1web Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+			<!-- 添加依赖关系 -->
+			<groupId>com.sishuok</groupId>
+			<artifactId>customermgr</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>com.sishuok</groupId>
+			<artifactId>goodsmgrweb</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>archtecture1web</finalName>
+		<defaultGoal>compile</defaultGoal>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.4.4.v20170414</version>
+				<configuration>
+					<scanIntervalSeconds>5</scanIntervalSeconds>
+					<stopPort>9999</stopPort>
+					<webApp>
+						<contextPath>/</contextPath>
+					</webApp>
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>9080</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+				</configuration>
+			</plugin>
+			<plugin>
+				<!-- maven的war包插件 -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<overlays>
+						<overlay>
+							<groupId>com.sishuok</groupId>
+							<artifactId>customermgr</artifactId>
+						</overlay>
+						<overlay>
+							<groupId>com.sishuok</groupId>
+							<artifactId>goodsmgrweb</artifactId>
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

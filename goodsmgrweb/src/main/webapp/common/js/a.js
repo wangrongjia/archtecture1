@@ -1,0 +1,1 @@
+alert("goodsmgrweb  a.js");
